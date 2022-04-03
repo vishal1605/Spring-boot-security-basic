@@ -7,33 +7,61 @@
 </head>
 <body>
 	<div class="container">
-		<div th:if="${param.error}" class="text-center alert alert-danger">
-			<h5>Invalid username and password</h5>
-		</div>
-		<div th:if="${param.logout}" class="text-center alert alert-success">
-			<h5>You have been logout</h5>
-		</div>
-		<form th:action="@{/loginForm}" method="post" action="#">
-
-			<div class="form-group">
-				<label for="exampleInputEmail">Username</label> <input type="text"
-					class="form-control" id="exampleInputEmail"
-					placeholder="Enter username" name="username">
+		<div class="row google-login">
+			<div class="col-6 m-auto">
+				<div class="jumbotron p-0 m-0 text-center">
+					<h3>Login with google</h3>
+					<h4><a th:href="@{/oauth2/authorization/google}">Google</a></h4>
+					
+					
+				</div>
 
 			</div>
 
-			<div class="form-group">
-				<label for="exampleInputPassword">Password</label> <input
-					type="password" class="form-control" id="exampleInputPassword"
-					placeholder="Enter Password" name="password">
+		</div>
+		<div class="row">
+		<div class="col-6 m-auto text-center">
+		<h1>OR</h1>
+		</div>
+		</div>
+
+		<div class="row">
+			<div class="col-6 m-auto">
+				<div th:if="${param.error}" class="text-center alert alert-danger">
+					<h5>Invalid username and password</h5>
+				</div>
+				<div th:if="${param.logout}" class="text-center alert alert-success">
+					<h5>You have been logout</h5>
+				</div>
+				<form th:action="@{/loginForm}" method="post" action="#">
+
+					<div class="form-group">
+						<label for="exampleInputEmail">Username</label> <input type="text"
+							class="form-control" id="exampleInputEmail"
+							placeholder="Enter username" name="username">
+
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputPassword">Password</label> <input
+							type="password" class="form-control" id="exampleInputPassword"
+							placeholder="Enter Password" name="password">
+
+					</div>
+
+					<button type="submit" class="btn btn-primary">Login</button>
+				</form>
+			</div>
+		</div>
+		<br />
+
+		<div class="row">
+			<div class="col-6 m-auto">
+				<h3>
+					<a th:href="@{/}">Register Yourself</a>
+				</h3>
 
 			</div>
-
-			<button type="submit" class="btn btn-primary">Login</button>
-		</form>
-		</br>
-		<div class="register">
-		<h3><a th:href="@{/}">Register Yourself</a></h3>
 		</div>
 
 	</div>

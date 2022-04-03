@@ -51,8 +51,9 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 			.and().formLogin().loginPage("/loginForm")
 			.defaultSuccessUrl("/default").permitAll()
 			.and()
-			.logout().logoutUrl("/logout")
-			.invalidateHttpSession(true)
+			.oauth2Login().defaultSuccessUrl("/processing-google").permitAll()
+			.and()
+			.logout().logoutUrl("/invalid")
 			.permitAll()
 			;
 			

@@ -11,6 +11,9 @@
 Register Form
 </div>
 	<div class="container">
+		
+		<div class="row">
+		<div class="col-6 m-auto">
 		<form method="post" th:action="@{/register}" th:object="${clinit}">
 			<div class="form-group">
 				<label for="exampleInputName">Name</label> <input
@@ -26,7 +29,7 @@ Register Form
 			
 			<div class="form-group">
 				<label for="exampleInputAge">Age</label> <input
-					type="number" class="form-control" id="exampleInputAge"
+					type="text" class="form-control" id="exampleInputAge"
 					aria-describedby="emailHelp" placeholder="Enter Age" name="age" th:value="${clinit.age}">
 			</div>
 			
@@ -53,9 +56,20 @@ Register Form
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 		
-		</br>
 		
+		</div>
+		
+		
+		</div>
+		<br/>
+		<div class="row">
+		<div class="col-6 m-auto">
 		<h3><a th:href="@{/loginForm}">Login</a></h3>
+		
+		</div>
+		
+		</div>
+		
 	</div>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package com.jwt;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,6 +85,22 @@ public class JwtController {
 		}
 		return "redirect:/admin/" + userName;
 
+	}
+	
+	@GetMapping("/processing-google")
+	public String user(@AuthenticationPrincipal OAuth2User principal, Model m) {
+		System.out.println(principal);
+        Map<String,Object> map = Collections.singletonMap("name", principal.getAttribute("name"));
+        Map<String,Object> email = Collections.singletonMap("email", principal.getAttribute("email"));
+        System.out.println(map);
+        m.addAttribute("map", map);
+        m.addAttribute("email", email);
+        return "googler";
+	}
+	
+	@PostMapping("/invalid")
+	public String logout() {
+		return "redirect:/loginForm";
 	}
 
 }
