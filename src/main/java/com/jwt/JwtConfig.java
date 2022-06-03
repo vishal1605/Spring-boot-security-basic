@@ -48,6 +48,7 @@ public class JwtConfig extends WebSecurityConfigurerAdapter {
 		 .antMatchers("/admin/**").hasAuthority("ADMIN")
 		 .antMatchers("/**", "/css/**", "/js/**", "/webfonts/**").permitAll()
 			.anyRequest().authenticated()
+			.and().rememberMe().key("thisisavishalapp")
 			.and().formLogin().loginPage("/loginForm")
 			.defaultSuccessUrl("/default").permitAll()
 			.and()

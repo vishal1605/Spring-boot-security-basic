@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -88,14 +90,23 @@ public class JwtController {
 	}
 	
 	@GetMapping("/processing-google")
-	public String user(@AuthenticationPrincipal OAuth2User principal, Model m) {
+	public String user(@AuthenticationPrincipal OAuth2User principal, HttpServletRequest req) {
 		System.out.println(principal);
-        Map<String,Object> map = Collections.singletonMap("name", principal.getAttribute("name"));
+        Map<String,Object> name = Collections.singletonMap("name", principal.getAttribute("name"));
         Map<String,Object> email = Collections.singletonMap("email", principal.getAttribute("email"));
-        System.out.println(map);
-        m.addAttribute("map", map);
-        m.addAttribute("email", email);
-        return "googler";
+        System.out.println(name);
+        req.setAttribute("name", name);
+        
+        return "forward:/google";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/google")
+	public String googler(HttpServletRequest req, Model m) {
+		Map<String,Object> names =(Map<String,Object>) req.getAttribute("name");
+		m.addAttribute("myName", names);
+		
+		return "googler";
 	}
 	
 	@PostMapping("/invalid")
